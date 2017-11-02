@@ -1,0 +1,120 @@
+{% extends 'home_page.html' %}
+{% block conten %}
+<div class="text-center">
+	<p style="text-align: center; padding: 5px;">You can also <i class="fa fa-cogs"></i> <a href="#myModal" style="color: blue; background-color: #eee;" role="button" data-toggle="modal">personalize tune your feeds</a> or <i class="fa fa-key"></i> <a href="{% url "password_change" %}" style="color: blue; background-color: #eee;">change your password</a>.<p>
+</div>
+{% for product in products %}
+<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+	<a href="{% url 'findit:analytics' product.id %}" target='_blank'>
+		<div class="snpt {% if product.genre == 'shirts' %}happy{% elif product.genre == '' %}hapy{% elif product.genre == 'laptops' %}hay{% elif product.genre == 'televisions' %}ha{% elif product.genre == 'women-dresses' %}h{% endif %}">
+
+			<img src="{{ product.image.url }}" style="width: 200px;">
+			<p style="padding: 1rem;">{{ product.name }}</p>
+						<hr>
+						<span style="padding: 1rem;">N{{ product.price }}</span>
+						<br>
+						<span style="padding: 1rem;">{{ product.shop }}</span>
+						<br>
+						<!-- {{ product.analytics.number_of_clicks }} -->
+		</div>
+	</a>
+</div>
+{% empty %}
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<p>Sorry we could find any of that query on database </p>
+		</div>
+	</div>
+</div>
+{% endfor %}
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">personalize your feeds</h4>
+      </div>
+      <div class="modal-body">
+      <!-- <div class="col-md-3"> -->
+      <div class="text-center">
+      <div class="flex-container">
+       <div>
+       <span><i class="fa fa-mobile"></i> Phone</span>
+       <br>
+       <br>
+       <a href="#" class="button-twitter phon btn-sub" id="section_sub" data-action="{% if '' in sub_list %}un{% endif %}subsribe" variable=""><span class="sub">{% if '' in sub_list %}un{% endif %}subsribe</span></a>
+       </div>
+       
+       <!-- </div> -->
+       <!-- <div class="col-md-3"> -->
+       <br>
+       <div>
+       <span><i class="fa fa-laptop"></i> Laptops</span>
+       <br>
+       <br>
+       <a href="#" class="button-twitter lap btn-sub" id="section_sub" data-action="{% if 'laptops' in sub_list %}un{% endif %}subsribe" variable="laptops"><span class="sub">{% if 'laptops' in sub_list %}un{% endif %}subsribe</span></a>
+       </div>
+       <br>
+       <div>
+       <span><i class="fa fa-mars"></i> Men shirts</span>
+       <br>
+       <br>
+       <a href="#" class="button-twitter shirts btn-sub" data-action="{% if 'shirts' in sub_list %}un{% endif %}subsribe" variable='shirts'><span class="sub">{% if 'shirts' in sub_list %}un{% endif %}subsribe</span></a>
+       </div>
+       <br>
+       <div>
+       <span><i class="fa fa-laptop"></i> Women's Dresses </span>
+       <br>
+       <br>
+       <a href="#" class="button-twitter women btn-sub" data-action="{% if 'women-dresses' in sub_list %}un{% endif %}subsribe" variable="women-dresses"><span class="sub">{% if 'women-dresses' in sub_list %}un{% endif %}subsribe</span></a>
+       </div>
+       <br>
+       <div>
+       <span><i class="fa fa-laptop"></i> Tvs</span>
+       <br>
+       <br>
+       <a href="#" class="button-twitter tv btn-sub" data-action="{% if 'televisions' in sub_list %}un{% endif %}subsribe" variable='televisions'>
+       <span class="sub">{% if 'televisions' in sub_list %}un{% endif %}subsribe</span></a>
+       </div>
+     </div>
+     </div>
+      <!-- <p style="margin-top: 5%;text-align: center; font-size: 110%;"><a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="button"><i class="fa fa-facebook-official"></i></a><a href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}" class="button-twitter"><i class="fa fa-twitter"></i> </a> <a href='http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}.' class="button-danger"><i class="fa fa-reddit"></i></a></p>
+      <a href="#" id="section_sub" data-id="{{ section.id }}" data-user='{{ request.user }}' class="btn btn-sub {% if request.user in section.subscribers.all %}btn-warning{% else %} btn-default {% endif %}" data-action="{% if request.user in section.subscribers.all %}un{% endif %}subsribe"> <span class="sub"><span>{% if request.user in section.subscribers.all %}un{% endif %}subsribe</span></span> <i class=" fa fa-bell"></i></a>
+        <br> -->
+        <!-- </div> -->
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$('.btn-sub').on('click', function(event){
+    event.preventDefault();
+    var element = $(this);
+    var li = $(this).closest("a");
+    var previous_action = $('a#section_sub',li).data('action');
+    var varip = $('a#section_sub',li).data('variable');
+    // console.log(varip);
+
+    // toggle data-action
+    $('a#section_sub',li).data('action', previous_action == 'subsribe' ? 'unsubsribe' : 'subsribe');
+
+    // update total likes
+    var previous_action = $('.sub',li).text();
+    $('.sub',li).text(previous_action == 'subsribe' ? 'unsubsribe' : 'subsribe');
+    if ($('.btn-sub',li).hasClass('btn-warning')){
+      $('.btn-sub',li).removeClass('lap');
+      $('.btn-sub',li).addClass('btn-default');
+    }
+    else{
+      $('.btn-sub',li).addClass('lap');
+    }
+    $.ajax({
+      url: "{% url 'subscribe' %}",
+      type: 'GET',
+      data: { sub : element.attr("variable")},
+  })
+})
+</script>
+{% endblock %}

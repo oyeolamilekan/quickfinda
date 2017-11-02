@@ -1,0 +1,245 @@
+{% extends 'home_page.html' %}
+{% block title %}{% if query %} {{ query }} results{% else %}Check it, buy it{% endif %}{% endblock %}
+{% block home %}active{% endblock %}
+{% load feedback %}
+{% load static %}
+{% block conten %}
+<style type="text/css">
+.navbar-default {
+    background-color: white;
+    border-radius: 0px;
+    border-bottom-color: #ddd;
+    border-bottom-width: 3px;
+}
+.navbar-default .navbar-nav > li > a{
+    color: #ccc;
+}
+.navbar-default .navbar-nav > .active > a{
+    background-color: transparent;
+    color: #FFF;
+    padding-bottom: 10px;
+    border-bottom: 5px solid black;
+}
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > a:hover {
+    color: #ccc;
+    -webkit-transition: all 150ms ease-in-out;
+    -moz-transition: all 150ms ease-in-out;
+    -ms-transition: all 150ms ease-in-out;
+    -o-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+}
+.navbar-default .navbar-nav > .active > a {
+    background-color: transparent;
+    color: black;
+    padding-bottom: 0.62em;
+    border-bottom: 0.45em solid black;
+}
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > li > a:hover {
+    background-color: transparent;
+    color: black;
+    padding-bottom: 0.62em;
+    border-bottom: 0.45em solid black;
+}
+@media(max-width:767px){
+    .navbar-default .navbar-nav > .active > a {
+        border-bottom: none;
+        border-left: 0.45em solid black;
+        padding-left: 0.5em;
+        border-bottom: none;
+    }
+    .navbar-default .navbar-nav > .active > a:hover,
+    .navbar-default .navbar-nav > li > a:hover {
+        background-color: transparent;
+        color: black;
+        padding-bottom: 0.62em;
+        border-bottom: none;
+        border-left: 0.45em solid black;
+        padding-left: 0.5em;
+    }
+}
+.snpt{
+    border-radius: 2px;
+    height: 425px;
+    border-radius: 1px;
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.happy{
+    border-radius: 2px;
+    border: 1px solid black;
+}
+.hapy{
+    border-radius: 2px;
+    border: 1px solid #5ce438;
+}
+.hay{
+    border-radius: 2px;
+    border: 1px solid rgba(51, 122, 183, 0.86);
+}
+.ha{
+    border-radius: 2px;
+    border: 1px solid rgba(234, 89, 82, 0.86);
+}
+.h{
+    border-radius: 2px;
+    border: 1px solid #ffb6c1;
+}
+body {
+    background-color: #f1f1f1;
+    padding-top: 6em;
+}
+.navbar-default {
+    background-color: white;
+    border-radius: 0px;
+    border-bottom-color: #ddd;
+    border-bottom-width: 3px;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+a:hover {
+	text-decoration: none;
+	color: black;
+}
+img.baby_mama {
+  margin-left:  0px !important;
+}
+@media screen and (max-width:320px){
+    img.baby_mama {
+        width: 88%;
+        margin-left: 0px !important;
+    }
+}
+.ads-page {
+    position: absolute;
+    top: 0px;
+    right: 1.10em;
+    padding: 3px;
+    background-color: #453dfc;
+    color: #fff;
+}
+.green {
+    color: #39e639;
+}
+.red {
+    color: #ef5e3d;
+}
+.watch{
+  background-color:#596aef;
+  border-color:#596aef;
+  color: #fff;
+}
+.watchw{
+  background-color:#ef59b2;
+  border-color:#ef59b2; 
+  color: #fff;
+}
+</style>
+<div class="panel uniquee panel-primary">
+  <div class="panel-body">
+    <a href="#" style="border:1px solid #eee; padding: 9px 10px; color: black; border-radius: 4px;">
+      <b><i class="fa fa-globe"></i> Categories</b>
+    </a>
+  </div>
+</div>
+<div class="">
+  <div class="panel unique panel-default">
+    <div class="panel-body">
+      <ul class="tags">
+       <li><a href="{% url 'findit:real_index' %}" class="mklo la">Discover </a></li>
+       <li><a href="{% url 'findit:index' %}" class="mklo lap">Phone </a></li>
+       <li><a href="{% url 'findit:laptops'  %}" class="mklo phon">Laptops </a></li>
+       <li><a href="{% url 'findit:tv_index'  %}" class="mklo tv"> Tvs </a></li>
+       <li><a href="{% url 'findit:shirts'  %}" class="mklo shirts">Men shirts </a></li>
+       <li><a href="{% url 'findit:wemen'  %}" class="mklo women">Women's Dresses </a></li>
+       <li><a href="{% url 'findit:men_watch'  %}" class="mklo watch"> Men Watches </a></li>
+       <li><a href="{% url 'findit:women_watch'  %}" class="mklo watchw"> Women Watches </a></li>
+       <!-- <li><a href="{% url 'findit:wemen'  %}" class="mklo women"><i class="fa fa-female"></i> Women's Watches </a></li> -->
+       <!-- <li><a href="#" class="mklo"> Naij</a></li>
+       <li><a href="#" class="mklo"> Techcrunch</a></li>
+       <li><a href="#" class="mklo"> Sport.naij</a></li> -->
+      </ul>
+      <p></p>
+    </div>
+  </div>
+</div>
+{% if ad %}
+<div class="list-inline list-unstyled text-center">
+    {% for ads in ad %}
+        <a href="{% url 'adengine:ads' ads.id %}" data-id='{{ ads.id }}' class="loppp" target="_blank"> <span style="position: absolute; background-color:rgba(255, 255, 255, 0.9); color: black; padding: 3px;">Ads</span> <img src="{{ ads.banner.url }}" class="baby_mama" data-id='{{ ads.id }}'></a>
+    {% endfor %}
+</div>
+{% endif %}
+<br>
+<p style="padding-left: 20px;">
+    {% if confirmed %}
+        {{ confirmed }},
+    {% endif %}
+    request completed in {{ query_time }}
+</p>
+<div class="hello">
+{% if prod_ad %}
+    {% for product in prod_ad %}
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <a href="{% url 'adengine:ads' product.id %}" target='_blank'>
+            <div class="snpt {% if product.genre == 'shirts' %}happy{% elif product.genre == '' %}hapy{% elif product.genre == 'laptops' %}hay{% elif product.genre == 'televisions' %}ha{% elif product.genre == 'women-dresses' %}h{% endif %}">
+
+                <img src="{{ product.banner.url }}" style="width: 200px;">
+                <p style="padding: 1rem;">{{ product.title }}</p>
+                            <hr>
+                            <span style="padding: 1rem;">&#8358 {{ product.price }}</span>
+                            <br>
+                            <span class="ads-page">Ads</span>
+                            <br>
+                            <!-- {{ product.old_price_digit }} -->
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+{% endif %}
+    {% include 'results_ajax.html' %}
+</div>
+<div class="load text-center lastThingboy" style="display: none; clear: both; background-color: #fff; padding: 10px;">
+    <img src="{% static 'loading.gif' %}">
+</div>
+<div class="text-center" style="clear: both; background-color: #fff; padding: 10px; position: relative; bottom: 0px; width: 100%;">
+    &copy alabaweb 2017
+    <div class="lastThingboy"></div>
+</div>
+
+{% endblock %}
+{% block domready %}
+{% if com == 'Nothing' %}
+ 
+{% else %}
+    var page = 1;
+    var empty_page = false;
+    var block_request = false;
+    $(window).scroll(function() {
+        var margin = $(document).height() - $(window).height() - 200;
+        if  ($(window).scrollTop() > margin && empty_page == false && block_request == false) {
+        block_request = true;
+        page += 1;
+        $('.load').show();
+        $.get('?page=' + page, function(data) {
+            if(data == '')
+            {
+                empty_page = true;
+                $('.load').hide();
+                $('.lastThingboy').html('<h4>Nothing to see</h4>')
+            }
+            else {
+                    block_request = false;
+                    $('.load').hide();
+                    $('.hello').append(data);
+              }
+            });
+      }
+    });
+{% endif %}
+{% endblock %}

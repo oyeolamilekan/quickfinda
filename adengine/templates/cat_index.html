@@ -1,0 +1,40 @@
+{% extends 'home_page.html' %}
+{% load static %}
+{% load bootstrap3 %}
+{% block adss %}
+active
+{% endblock %}
+{% block conten %}
+<style type="text/css">
+	.info {
+		background-color: #d9edf7;
+		border: 1px solid #bce8f1;
+		color: #31708f;
+		padding: 10px 15px;
+		font-size: 14px;
+		margin-bottom: 2.5rem;
+	}
+</style>
+<div class="col-sm-6 col-sm-offset-3">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<h4 class="text-center">Banner Ads {% if request.user.ads_set.exists %} <span class="badge" style="padding: 0.27rem 0.55rem 0.2rem 0.4rem; color: #71ea73; background-color: #71ea73;">5</span>{% endif %}</h4>
+			<div class="info">
+			<p class="text-center"><b><i class="fa fa-info-circle"></i> Sidenote</b> Banner Ads advertises you website in form of a banner on the website</p>
+		</div>
+		<a href="{% url 'adengine:dash' %}?type=Banner" class="btn btn-success btn-block">Go to dashboard</a>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<h4 class="text-center">Product Ads {% if ad_1 %} <span class="badge" style="padding: 0.27rem 0.55rem 0.2rem 0.4rem; color: #71ea73; background-color: #71ea73;">5</span>{% endif %}</h4>
+			<div class="info">
+			<p class="text-center"><b><i class="fa fa-info-circle"></i> Sidenote</b> Brings out product as part of the major result when users search for product</p>
+
+		</div>
+		<a href="{% url 'adengine:dash' %}?type=Products" class="btn btn-success btn-block">Go to dashboard</a>
+		</div>
+		
+	</div>
+</div>
+{% endblock %}

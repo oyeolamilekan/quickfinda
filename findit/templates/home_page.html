@@ -1,0 +1,247 @@
+<!doctype html>
+{% load bootstrap3 %}
+{% load static %}
+{% load feedback %}
+<html>
+<head>
+	<title>{% block title %}Check it, buy it{% endblock %}</title>
+	
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/png" href="{% static 'quickfinda.png' %}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  
+<link rel="stylesheet" type="text/css" href="{% static 'styling.css' %}">
+</head>
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-101606756-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<style type="text/css">
+  .glyphicon-search {
+    z-index: 99;
+    left: 1.7em;
+}
+.specialBar{
+    display: none;
+}
+@media screen and (max-width: 767px){
+    .specialBar{
+        display: block;
+    }
+    .xs{
+      display: none;
+    }
+}
+nav form#seah .input-group .form-control {
+    border-radius: 0.25em;
+    border: none;
+    width: 100%;
+    padding-left: 1.9em;
+    background-color: #F3F3F3;
+    box-shadow: none;
+}
+
+@media screen and (max-width: 425px){
+    a.loppp:first-child{
+      display: none;
+    }
+}
+body{
+  background: url("{% static 'bg123.jpg'%}") cover;
+}
+img.baby_mama{
+    width: 100%;
+    max-width: 318px;
+    max-height: 106px;
+}
+</style>
+<body>
+<div class="loading"></div>
+<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+      <div class="navbar-header">
+      <a class="navbar-brand" href="/"><img src="{% static 'quickfinda.png' %}" class="text-center" style="width:50px; position:relative; top:-12px;"></a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <i class="fa fa-bars"></i>
+                <b>Menu</b>
+            </button>
+            
+        </div>
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav" style="margin-right: -10px;">
+                <li class="{% block home %}{% endblock %}">
+                    <a href="/" style="background-color: white;">
+                        <i class="fa fa-home"></i> Home
+                    </a>
+                </li>
+                 
+                <!-- <li class="{% block adss %}{% endblock %}">
+                    <a href="{% url 'adengine:home_page' %}" style="background-color: white;">
+                        <i class="fa fa-money"></i> AdEngine
+                    </a>
+                </li> -->
+              </ul>
+      <form id="search" role="search" class="col-sm-3 xs" action="{% if mack %}{% url 'shop:store_details' shop %}{% else %}{% url 'findit:real_index' %}{% endif %}" method="get">
+				<div class="input-group">
+					<span class="glyphicon glyphicon-search" ariahidden="
+					true"></span>
+					<input type="text" class="form-control transition" name="q"
+					placeholder="Search...">
+				</div>
+			</form>
+			<ul class="nav navbar-nav navbar-right">
+      <!-- {% if request.user.is_authenticated %}
+      <li class="">
+              <a href="{% url 'register' %}" role="button" data-toggle="modal">
+              <i class="fa fa-user"></i>
+                Hi, {{ request.user}}
+              </a>
+          </li>
+          <li class="">
+              <a href="{% url 'logout' %}" role="button" data-toggle="modal">
+              <i class="fa fa-user"></i>
+                logout
+              </a>
+          </li>
+        {% else %}
+          <li class="{% block register %}{% endblock %}">
+              <a href="{% url 'register' %}" role="button" data-toggle="modal">
+              <i class="fa fa-user"></i>
+                 Register
+              </a>
+          </li>
+          <li class="{% block login %}{% endblock %}">
+              <a href="{% url 'login' %}" role="button" data-toggle="modal">
+              <i class="fa fa-sign-in"></i>
+                 Login
+              </a>
+          </li>
+          {% endif%} -->
+                <!-- {% if request.user.is_authenticated %}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle='dropdown'>
+                      <i class="fa fa-user-o"></i> 
+                      Hi, {{ request.user }}
+                      <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'adengine:index' %}"><i class="fa fa-money"></i> My ads</a></li>
+                        <li>
+                    <a href="{% url 'password_change' %}">
+                    <i class="fa fa-lock"></i> Change password</a>
+                      </li>
+                      <li role="separator" class="divider"></li>
+                        <li>
+                    <a href="{% url 'logout' %}">
+                    <i class="fa fa-sign-out"></i>logout</a>
+                      </li> 
+                    </ul>
+                </li>
+                {% else %}
+              <li class="{% block logn %}{% endblock %}"><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Login</a></li>
+                        <li>
+              <li class="{% block regster %}{% endblock %}"><a href="{% url 'register' %}"><i class="fa fa-cloud"></i> Sign up</a></li>
+                        <li>
+              {% endif %} -->
+              <li class="">
+                    <a href="#myModal" role="button" data-toggle="modal">
+                      Send Feedback
+                    <i class="fa fa-envelope"></i>
+                    </a>
+                </li>
+			</ul>
+          </div>
+        <div class="specialBar">
+          <form role="search" id="seah">
+          <div class="input-group" style="position: absolute; top: 10.5px; left: 18.5%;width: 50%;">
+          <input type="text" class="form-control transition" name="q"
+          placeholder="Search...">
+          </div>
+          </form>
+        </div>
+        </div>
+        </div>
+    </nav>
+
+{% block conten %}
+{% endblock %}
+
+<div class="modal fade" id="myModa">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">How to use pricenpick?</h4>
+			</div>
+			<div class="modal-body">
+			<h3 style="text-align: center;">What is quickfinda?</h3>
+			<p class="text-center">finda helps find the best deals on mobile phone accross the internet</p>
+			<h3 class="text-center">How does quickfinda work?</h3>
+        <div class="text-center">
+            <span>1. Type the device you are looking for into the search bar</span>
+            <br>
+            <span>2. if you are looking for something random click the <a href="{% url 'findit:index' %}">Phone</a> or <a href="{% url 'findit:laptops' %}">Laptops</a> button</span>
+        </div>
+        <p style="margin-top: 5%;text-align: center; font-size: 110%;"><a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="button"><i class="fa fa-facebook-official"></i></a><a href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}" class="button-twitter"><i class="fa fa-twitter"></i> </a> <a href='http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}.' class="button-danger"><i class="fa fa-reddit"></i></a></p>
+				<br>
+				<br>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><i class="fa fa-envelope"></i> Send us Feedback {{ store }}</h4>
+      </div>
+      <div class="modal-body feedback-loop">
+      <h4>Please send us your feed back in other to improve the site</h4>
+      <div style="padding: 20px">
+      {% report_form request.build_absolute_uri %}
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script>
+	$(document).ready(function(){
+      var screen_width = screen.width
+      if (screen_width <= 425){
+          // $('.baby_mama:first').hide();
+          var element = $('.loppp:first');
+          $.ajax({
+              url: '/minus_club/',
+              type: 'GET',
+              data: { ad_id : element.attr("data-id")},
+          })
+      }
+      {% block domready %}
+      {% endblock %}
+    });
+	$('.uniquee').click(function(event){
+        event.preventDefault();
+        $('.unique').slideToggle(400, function(){
+            $(this).toggleClass('planet-expan').css('display','');
+        });
+
+    })
+    
+</script>
+</html>

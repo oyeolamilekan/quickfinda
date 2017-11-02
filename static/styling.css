@@ -1,0 +1,311 @@
+body{
+  background: url('../moon.jpg/');
+}
+.snpt{
+    border-radius: 2px;
+	  height: 425px;
+    border-radius: 1px;
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.happy{
+    border-radius: 2px;
+    border: 1px solid black;
+}
+.hapy{
+    border-radius: 2px;
+    border: 1px solid #5ce438;
+}
+.hay{
+    border-radius: 2px;
+    border: 1px solid rgba(51, 122, 183, 0.86);
+}
+.ha{
+    border-radius: 2px;
+    border: 1px solid rgba(234, 89, 82, 0.86);
+}
+.h{
+    border-radius: 2px;
+    border: 1px solid #ffb6c1;
+}
+body {
+    background-color: #f1f1f1;
+    padding-top: 6em;
+}
+.navbar-default {
+    background-color: white;
+    border-radius: 0px;
+    border-bottom-color: #ddd;
+    border-bottom-width: 3px;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+a:hover {
+	text-decoration: none;
+	color: black;
+}
+nav form#search {
+    padding: 0.9em;
+    margin-top: -5px;
+}
+nav form#search .input-group {
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+}
+nav form#search .input-group .form-control {
+    border-radius: 0.25em;
+    border: none;
+    width: 70%;
+    padding-left: 1.9em;
+    background-color: #F3F3F3;
+    box-shadow: none;
+}
+nav form#search .input-group .form-control:focus {
+    width: 190%;
+    box-shadow: none;
+}
+nav form#search .glyphicon-search {
+    z-index: 99;
+    left: 1.7em;
+}
+.tags {
+  margin: 0;
+  padding: 1em;
+  list-style: none;
+}
+.tags li {
+  display: inline-block;
+  margin: .5em;
+}
+.tags { 
+  margin-left: 10em;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+a.button:hover{
+    text-decoration: none;
+    color: white;
+}
+.uniquee {
+    margin-top: -25px;
+    display: none;
+}
+.unique{
+  margin-top: -30px;
+  display: block;
+}
+@media screen and (max-width: 480px){
+  .unique {
+    display: none;
+  }
+  .uniquee {
+    margin-top: -25px;
+    display: block;
+  }
+  div.planet-expan{
+    display: block;
+  }
+}
+.panel {
+    /* margin-bottom: 20px; */
+    background-color: #fff;
+    border: 0px !important;
+    border-radius: 0px !important;
+    border-radius: 0px !important;
+    -webkit-box-shadow: 0 !important;
+    box-shadow: 0px !important; 
+}
+.success{
+    color: forestgreen;
+}
+.danger{
+    color: red;
+}
+.cool-link{
+    color: #F68B1E;
+}
+<style type="text/css">
+.button {
+    min-width: 0;
+    color: #fff;
+    background-color: #2182d6;
+}
+.button-danger {
+    min-width: 0;
+    color: #fff;
+    background-color: #d43f3a;
+    padding: 0.5em 2em;
+    margin-top: 1.5em;
+    margin-right: 0.6em;
+    font-weight: bold;
+    border-radius: 4px;
+}
+a.button-danger:hover{
+    text-decoration: none;
+    color: white;
+}
+a.button-danger:hover{
+    text-decoration: none;
+    color: white;
+}
+a.button:hover{
+    text-decoration: none;
+    color: white;
+}
+a.button-twitter:hover{
+    text-decoration: none;
+    color: white;
+}
+.panel-body{
+  background-color: #fff;
+}
+body{
+  background-color: #eee;
+}
+.navbar-default {
+  background-color: white;
+}
+.button {
+    min-width: 0;
+    color: #fff;
+    background-color: #2182d6;
+    padding: 0.5em 2em;
+    margin-top: 1.5em;
+    margin-right: 0.6em;
+    font-weight: bold;
+    border-radius: 4px;
+}
+.button-twitter {
+    min-width: 0;
+    color: #fff;
+    background-color: #1da1f2;
+    padding: 0.5em 2em;
+    margin-top: 1.5em;
+    margin-right: 0.6em;
+    font-weight: bold;
+    border-radius: 4px;
+}
+.button-danger {
+    min-width: 0;
+    color: #fff;
+    background-color: #d43f3a;
+    padding: 0.5em 2em;
+    margin-top: 1.5em;
+    margin-right: 0.6em;
+    font-weight: bold;
+    border-radius: 4px;
+}
+.mklo{
+  padding: 4px;
+  border: 1px solid;
+  border-radius: 3px;
+}
+a.lap{
+  background-color: #5ce438;
+  border-color: #5ce438;
+  color: #fff;
+}
+.phon{
+  background-color:rgba(51, 122, 183, 0.86);
+  border-color:rgba(51, 122, 183, 0.86);
+  color: #fff;
+
+}
+.la{
+  background-color:rgba(144, 40, 142, 0.7);
+  border-color:rgba(144, 40, 142, 0.7);
+  color: #fff;
+
+}
+.tv{
+  background-color:rgba(234, 89, 82, 0.86);
+  border-color:rgba(234, 89, 82, 0.86);
+  color: #fff;
+}
+.shirts{
+  background-color:black;
+  border-color:black;
+  color: #fff; 
+}
+.women{
+  background-color:#ffb6c1;
+  border-color:#ffb6c1;
+  color: #fff;
+}
+a.mklo:hover{
+  color: #fff;
+}
+.flex-container{
+    -moz-column-width: 235px;
+    -webkit-column-width: 235px;
+    column-width: 235px;
+            
+    -moz-column-count: 5;
+    -webkit-column-count: 6;
+    column-count: 5;
+            
+}
+.navbar-default {
+    background-color: white;
+    border-radius: 0px;
+    border-bottom-color: #ddd;
+    border-bottom-width: 3px;
+}
+.navbar-default .navbar-nav > li > a{
+    color: #ccc;
+}
+.navbar-default .navbar-nav > .active > a{
+    background-color: transparent;
+    color: #FFF;
+    padding-bottom: 10px;
+    border-bottom: 5px solid black;
+}
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > a:hover {
+    color: #ccc;
+    -webkit-transition: all 150ms ease-in-out;
+    -moz-transition: all 150ms ease-in-out;
+    -ms-transition: all 150ms ease-in-out;
+    -o-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+}
+.navbar-default .navbar-nav > .active > a {
+    background-color: transparent;
+    color: black;
+    padding-bottom: 0.62em;
+    border-bottom: 0.45em solid black;
+}
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > li > a:hover {
+    background-color: transparent;
+    color: black;
+    padding-bottom: 0.62em;
+    border-bottom: 0.45em solid black;
+}
+@media(max-width:767px){
+    .navbar-default .navbar-nav > .active > a {
+        border-bottom: none;
+        border-left: 0.45em solid black;
+        padding-left: 0.5em;
+        border-bottom: none;
+    }
+    .navbar-default .navbar-nav > .active > a:hover,
+    .navbar-default .navbar-nav > li > a:hover {
+        background-color: transparent;
+        color: black;
+        padding-bottom: 0.62em;
+        border-bottom: none;
+        border-left: 0.45em solid black;
+        padding-left: 0.5em;
+    }
+}

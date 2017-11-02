@@ -1,0 +1,26 @@
+{% for product in products %}
+<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+	<a href="{% url 'findit:analytics' product.id %}" target='_blank'>
+		<div class="snpt {% if product.genre == 'shirts' %}happy{% elif product.genre == '' %}hapy{% elif product.genre == 'laptops' %}hay{% elif product.genre == 'televisions' %}ha{% elif product.genre == 'women-dresses' %}h{% endif %}">
+
+			<img src="{{ product.image.url }}" style="width: 200px;">
+			<p style="padding: 1rem;">{{ product.name|truncatechars:120 }}</p>
+						<hr>
+						<span style="padding: 1rem;">&#8358 {{ product.price }} {% if product.old_price_digit == 0 %}{% elif product.real_price >  product.old_price_digit %} <i class="fa fa-arrow-up red"></i>{% else %}<i class="fa fa-arrow-down green"></i>{% endif %}</span>
+						<br>
+						<span style="padding: 1rem;">{{ product.shop }} </span>
+						<br>
+						
+						
+		</div>
+	</a>
+</div>
+{% empty %}
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<p>Sorry we could find any of that query on database </p>
+		</div>
+	</div>
+</div>
+{% endfor %}

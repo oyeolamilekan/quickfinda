@@ -1,0 +1,39 @@
+{% load bootstrap3 %}
+{% load static %}
+<form method="POST" action="/feedback/" id="wo">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+     <input type="submit" id='uploadSubmit' value="submit" class="btn btn-default"> {{ path}}
+   <div class="loa text-center" style="display: none;">
+        <img src="{% static 'loading.gif' %}">
+    </div>
+</form>
+<script type="text/javascript">
+$('#id_url_locator').val('' + '{{ url }}')
+$('#wo').on('submit', function(e){
+    e.preventDefault();
+    var fd = new FormData(document.querySelector("form#wo"));
+    $.ajax({
+            url: '/feedback/',
+            type: 'POST',
+            data: fd,
+            processData: false,  // tell jQuery not to process the data
+            contentType: false,   // tell jQuery not to set contentType
+        beforeSend: function () {
+            $('#id_content').val('');
+            $('#feelings').val('');
+            $('#wo').html('<img src="{% static 'img/loading.gif' %}">');
+        },
+
+        error : function(){
+            $('.feedback-loop').html("<div class='text-center'><h1 class='danger'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></h1> An inernal server error occured</div>")
+        },
+
+        success : function(){
+            $('.loa').hide();
+            $('.feedback-loop').html("<div class='text-center'><h1 class='success'><span class='glyphicon glyphicon-ok' aria-hidden='true'></span></h1> Thanks for the feed back, we promise to work on it</div>")
+        }
+
+    });
+});
+</script>

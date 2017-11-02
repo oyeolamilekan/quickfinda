@@ -1,0 +1,119 @@
+{% extends 'home_page.html' %}
+{% load bootstrap3 %}
+{% block regster %}active{% endblock %}
+{% load staticfiles %}
+{% block conten %}
+<style type="text/css">
+.button {
+    min-width: 0;
+    color: #fff;
+    background-color: #2182d6;
+}
+.button-danger {
+    min-width: 0;
+    color: #fff;
+    background-color: #d43f3a;
+    padding: 0.5em 2em;
+    margin-top: 1.5em;
+    margin-right: 0.6em;
+    font-weight: bold;
+    border-radius: 4px;
+}
+a.button-danger:hover{
+    text-decoration: none;
+    color: white;
+}
+a.button:hover{
+    text-decoration: none;
+    color: white;
+}
+.panel-body{
+	background-color: #fff;
+}
+body{
+	background-color: #eee;
+}
+.navbar-default {
+	background-color: white;
+}
+</style>
+<br>
+<div class="col-sm-6 col-sm-offset-3">
+	<div class="panel panel-primary">
+	  <div class="panel-heading">
+		<h1 style="text-align: center;"><i class="fa fa-user-circle"></i> Create an account</h1>
+		</div>
+		<div class="panel-body">
+		{% if form.error %}
+			<p>
+				Your username didn't match,Please try again
+			</p>
+		{% else %}
+		{% endif %}
+		<form action="." method="post" id="luck">
+			{% bootstrap_form user_form %}
+			{% csrf_token %}
+			<input type="hidden" name="next" value="{{ next }}"/>
+			<div class="form-group">
+       <div style="padding-left: 22px;">
+         <label class="checkbox">
+           <input type="checkbox" value="">
+           I Accept your <a  href="#myModal" role="button" data-toggle="modal" style="color: blue;">terms and condition</a>.
+         </label>
+       </div>
+     </div>
+			<p><button type="submit" class="btn btn-block btn-primary hurray">Register</button></p>
+		</form>
+</div>
+</div>
+</div>
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><i class="fa fa-envelope"></i> Adengine</h4>
+      </div>
+      <div class="modal-body feedback-loop">
+      <h4>What kind of ads would you not accept on rifqoh?</h4>
+      <ol>
+	<li>We will reject ads that we consider to be ethically or morally questionable in one way or the other.</li> 
+	<br>
+	<li>We reject ads for HYIPs and most MLMs because they are fundamentally unsustainable.</li>
+	<br>
+	<li>We reject ads for health remedies that make claims that have not been verified by NAFDAC because we know that they don't work as advertised.</li> 
+	<br>
+	<li>We reject online betting and forex trading ads not for moral reasons per se but because we know that most people who patronize these business expect to make money, but the vast majority of them will lose money.</li>
+	<br>
+	<li>We also reject some mailing list building ads because we don't want our members to be spammed. Sexual ads will only be accepted of placed in the sexuality section.</li>
+	<br>
+	<h4> Can we submit animated ads?</h4>
+
+	<p>No. This is because they are distracting. If your ads are attractive and well targeted, people will notice them without any animations.</p>
+
+	<p>Note: if any of this rules are violated your ad will deleted without any refunds</p>
+		</ul>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var $box = $('#luck');
+		var $checkbox = $box.find('input[type=checkbox]');
+		var $button = $box.find('button[type=submit]');
+		$button.attr('disabled','disabled');
+		$('input[type=checkbox]').on('click', function(e){
+			$('button[type=submit]').removeAttr('disabled');
+			if($button.hasClass('hurray')){
+				$button.removeClass('hurray');
+			}
+			else {
+				$button.attr('disabled','disabled');
+				$button.addClass('hurray')
+			}
+
+		})
+    })
+</script>
+{% endblock %}

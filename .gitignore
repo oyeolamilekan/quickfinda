@@ -1,0 +1,14 @@
+ll_env/ 
+__pycache__/
+*.sqlite3
+media/
+staticfiles
+
+# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+!.elasticbeanstalk/*.cfg.yml
+
+!.elasticbeanstalk/*.global.yml
+

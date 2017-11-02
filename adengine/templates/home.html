@@ -1,0 +1,152 @@
+{% extends 'home_page.html' %}
+{% load static %}
+{% load bootstrap3 %}
+{% block adss %}
+active
+{% endblock %}
+{% block conten %}
+<style type="text/css">
+	h1 {
+		font-size: 91px;
+	}
+	.hhh {
+		padding-top: 0px;
+	}
+	.stop {
+			padding-right: 0px;
+			padding-left: 6px;
+	}
+	@media screen and (max-width:425px){
+		.stop {
+			padding-right: 0px;
+			padding-left: 0px;
+		}
+	}
+	.closer {
+		margin-bottom: 4px;
+	}
+</style>
+<div class="col-sm-6 col-sm-offset-3">
+{% if ad_credit.as_ad_credit %}
+	<div class="panel panel-default closer">
+		<div class="panel-body">
+			<div class="links text-center">
+				<i class="fa fa-area-chart"></i>
+				Analytics | <a href="{% url 'adengine:upload_ads' %}?type={{type}}" style="color: blue;"><i class="fa fa-cloud-upload"></i> Upload your ads</a> {% if ad.expired == 'True' %} (your ad as expired){% else %}{{ time_remaining }} day(s) remaining{% endif %}
+
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default closer">
+		<div class="panel-body">
+			<canvas id="line-chart" width="800" height="450"></canvas>
+			{% if ad.expired == 'True' %}
+			<br>
+<a href="#myMal" role="button" data-toggle="modal" data-action='/adengine/reactivation/' class="btn btn-success btn-block rere">Reactivate your ad</a>
+			{% endif %}
+		</div>
+	</div>
+	<div class="col-sm-6" style="padding-right: 0px;padding-left: 0px;">
+		<div class="panel panel-default hhh closer">
+			<div class="panel-body">
+				<h1 class="text-center"><i class="fa fa-eye"></i></h1>
+				<h4 class="text-center">{{ ad.views }}</h4>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6 stop">
+		<div class="panel panel-default closer">
+			<div class="panel-body">
+				<h1 class="text-center"><i class="fa fa-mouse-pointer"></i></h1>
+				<h4 class="text-center">{{ ad.clicks }}</h4>
+			</div>
+		</div>
+	</div>
+{% else %}
+<div class="panel panel-success">
+	<div class="panel-heading" style="background-color: #44b669;">
+		<h3 class="text-center" style="color: white;">Buy your ad credit now
+</h3>
+	</div>
+	<div class="panel-body">
+		<script src="https://js.paystack.co/v1/inline.js"></script>
+		<div id="paystackEmbedContainer"></div>
+	</div>
+</div>
+{% endif %}
+</div>
+<div class="modal fade" id="myMal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><i class="fa fa-envelope"></i> Send us Feedback</h4>
+      </div>
+      <div class="modal-body feedback-loop">
+      <h4>Reactivate your account</h4>
+      <div style="padding: 20px">
+      <script src="https://js.paystack.co/v1/inline.js"></script>
+		<div id="paystackEmbedContainer"></div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.ajax({
+		method:'GET',
+		url: '/adengine/data_set/?type={{type}}',
+		success: function(data){
+			new Chart(document.getElementById("line-chart"), {
+		  type: 'line',
+		  data: {
+		    labels: data.days,
+		    datasets: [{ 
+		        data: data.data_set_2,
+		        label: "Clicks",
+		        borderColor: "#3e95cd",
+		        backgroundColor: '#3e95cd',
+		        fill: false
+		      }, { 
+		        data: data.data_set,
+		        label: "Views",
+		        borderColor: "#e807f5",
+		        backgroundColor: '#e201f5',
+		        fill: false
+		      }
+		    ]
+		  },
+		  options: {
+		    title: {
+		      display: true,
+		      text: 'Ad performance'
+		    }
+		  }
+		});
+		}
+	})
+});
+
+  PaystackPop.setup({
+   key: 'pk_test_f901a9c5023b1e56e21a6128baec1400757b71e0',
+   email: 'customer@email.com',
+   amount: 100000,
+   container: 'paystackEmbedContainer',
+   callback: function(response){
+   	urlp = $('.rere').data('action');
+   	if (urlp){}
+   	else {
+   		urlp = '/adengine/pay_val/?type={{type}}'
+   	}
+        $.ajax({
+			method:'GET',
+			url: urlp,
+			data: { confirm : 'True', ref_num : ''+response.reference}
+		});
+		alert('you have successfully purchased an ad credit, please reload the page for you to upload ads. transaction ref is ' + response.reference);
+    },
+  });
+</script>
+{% endblock %}

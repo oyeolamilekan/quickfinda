@@ -1,0 +1,30 @@
+{% extends 'home_page.html' %}
+{% load static %}
+{% load bootstrap3 %}
+{% block adss %}
+active
+{% endblock %}
+{% block conten %}
+<div class="col-sm-6 col-sm-offset-3">
+<a href="{% url 'adengine:upload_ads' %}?type={{type}}" style="color: blue;">
+<div class="panel panel-default">
+	<div class="panel-body">
+		< Back
+	</div>
+</div>
+</a>
+<div class="panel panel-default">
+		<div class="panel-heading" style="background-color: crimson;">
+			<h3 class="text-center" style="color: white;"><i class="fa fa-pencil"></i> Edit your ads</h3>
+		</div>
+		<div class="panel-body">
+			<form action="{% url 'adengine:edit_ads' ads.id %}?type={{type}}" method="post" enctype="multipart/form-data" id="work">
+				{% bootstrap_form form %}
+				{% csrf_token %}
+        		<p></p>
+				<button name="submit" class="btn btn-primary btn-block" id="share">Submit</button>
+			</form>
+		</div>
+</div>
+</div>
+{% endblock %}

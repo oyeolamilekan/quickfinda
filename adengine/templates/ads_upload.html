@@ -1,0 +1,69 @@
+{% extends 'home_page.html' %}
+{% load static %}
+{% load bootstrap3 %}
+{% block adss %}
+active
+{% endblock %}
+{% block conten %}
+<style type="text/css">
+	.closer {
+		margin-bottom: 4px;
+	}
+</style>
+<div class="col-sm-6 col-sm-offset-3">
+{% if ade %}
+<div class="panel panel-default closer">
+		<div class="panel-body">
+			<div class="links text-center">
+				<a href="{% url 'adengine:dash' %}?type={{type}}" style="color: blue;"><i class="fa fa-area-chart"></i> Analytics</a> | <i class="fa fa-cloud-upload"></i> Upload your ads {% if ade.expired == 'True' %} (your ad as expired){% else %}{{ time_remaining }} day(s) remaining{% endif %}
+			</div>
+		</div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="text-center">Ads Running</h3>
+	</div>
+	<div class="panel-body" style="text-align: center;">
+
+		{% if ade.banner %}
+			<img src="{{ ade.banner.url }}" style="width: 100%;">
+		{% else %}
+			please upload your banner
+		{% endif %}
+		<br>
+		<br>
+		<span>Title: {{ ade.title }}</span>
+		<br>
+		<span>Website: {{ ade.website }}</span>
+		<br>
+		<br>
+		{% if ade.expired == 'True' %}
+				<a href="#" class="btn btn-success btn-block">Reactivate your ad</a>
+		{% else %}
+			<a href="{% url 'adengine:edit_ads' ade.id %}?type={{type}}" class="btn btn-danger btn-block"><i class="fa fa-pencil"></i> Edit ads</a>
+		{% endif %}
+	</div>
+</div>
+{% elif ade == None %}
+	<div class="panel panel-danger">
+		<div class="panel-body text-center" style="background-color: #ebccd1; color: #a94442;">
+			<i class="fa fa-exclamation-triangle"></i> You have no ad credit
+		</div>
+	</div>
+{% else %}
+	<div class="panel panel-default">
+		<div class="panel-heading" style="background-color: crimson;">
+			<h3 class="text-center" style="color: white;">Upload your ads</h3>
+		</div>
+		<div class="panel-body">
+			<form action="{% url 'adengine:upload_ads' %}?type={{type}}" method="post" enctype="multipart/form-data" id="work">
+				{% bootstrap_form form %}
+				{% csrf_token %}
+        		<p></p>
+				<button name="submit" class="btn btn-primary btn-block" id="share">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}

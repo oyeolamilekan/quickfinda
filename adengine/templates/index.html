@@ -1,0 +1,70 @@
+{% extends 'home_page.html' %}
+{% load static %}
+{% load bootstrap3 %}
+{% block adss %}
+active
+{% endblock %}
+{% block conten %}
+<div class="col-sm-6 col-sm-offset-3">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			Dear Ladies & Gentlemen,
+
+			<p>Thank you for your interest in advertising on rifqoh!</p>
+
+
+			<p>To place ads on rifqoh, the first step is to get your ad banner designed by a good graphic designer. Your ad banner must be borderless, 318 pixels wide, 106 pixels tall, less than 30kb in size, and in the PNG or JPG format. Once it's ready, go to www.rifqoh.com/adengine and register for an adengine account(it's free) purchase your one week(1 week) ad spot for just 1k and upload your banner.</p>
+
+			<p>Our system is extremely simple by design.</p>
+
+			<p>We have a really simple analytics tool, that hepls in calculating how many users have seen and clicked you ads.</p>
+
+			<p>We look forward to doing business with you!</p>
+
+			Best regards,
+			<br>
+			Oye Johnson Olalekan.
+			<br>
+			<br>
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'adengine:index' %}" class="btn btn-danger btn-block">Go to dashboard</a>
+      {% else %}
+    		<a href="{% url 'register' %}" class="btn btn-danger btn-block">Register</a>
+    		<p style="text-align: center;">or</p>
+    		<a  href="#myModal" role="button" data-toggle="modal" class="btn btn-primary btn-block">Login</a>
+      {% endif %}
+		</div>
+	</div>
+</div>
+<!-- {{ form.as_p }} -->
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><i class="fa fa-envelope"></i> Send us Feedback</h4>
+      </div>
+      <div class="modal-body feedback-loop">
+      <!-- <h4>Please send us your feed back in other to improve the site</h4> -->
+      <div style="padding: 5px">
+      {% if form.error %}
+      <p>
+        Your username didn't match,Please try again
+      </p>
+    {% else %}
+      <p>Please, use the following form to log-in. if you don't have an account register here</p>
+    {% endif %}
+  <h4>Login with your Email or username</h4>
+    <form action="{% url 'login' %}" method="post">
+      {% bootstrap_form form %}
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}"/>
+      <p><input type="submit" value="Log-in" class="btn btn-block btn-danger"></p>
+    </form>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
